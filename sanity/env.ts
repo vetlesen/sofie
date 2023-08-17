@@ -14,7 +14,12 @@ export const apiVersion =
 //   'Missing environment variable: NEXT_PUBLIC_SANITY_PROJECT_ID'
 // )
 
+export const readToken = process.env.SANITY_API_READ_TOKEN
+
+export const previewSecretDocumentId: `${string}.${string}` = 'preview.secret'
+
 export const useCdn = false
+
 
 function assertValue<T>(v: T | undefined, errorMessage: string): T {
   if (v === undefined) {
