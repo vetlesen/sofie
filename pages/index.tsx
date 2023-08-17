@@ -327,26 +327,7 @@ export default function IndexPage({ home, images }) {
     <>
       <div className="relative grid grid-cols-12 gap-y-4 p-4 md:gap-x-4 xl:gap-y-2">
         <h1 className="fixed z-[100] col-span-3 col-start-1 xl:col-span-2">
-          hallo
-          <span className="fixed">L</span>
-          <span className="fadeOut pl-[9.1px]">a</span>
-          <span className="fadeOut">r</span>
-          <span className="fadeOut">s</span>
-          <span className="move1 fixed pl-1">P</span>
-          <span className="fadeOut pl-[14.8px]">e</span>
-          <span className="fadeOut">t</span>
-          <span className="fadeOut">t</span>
-          <span className="fadeOut">e</span>
-          <span className="fadeOut">r</span>
-          <span className="move2 fixed pl-1">P</span>
-          <span className="fadeOut pl-[14.8px]">e</span>
-          <span className="fadeOut">t</span>
-          <span className="fadeOut">t</span>
-          <span className="fadeOut">e</span>
-          <span className="fadeOut">r</span>
-          <span className="fadeOut">s</span>
-          <span className="fadeOut">e</span>
-          <span className="fadeOut">n</span>
+          Sofie
         </h1>
 
         <h1 className="top-4 col-span-12 col-start-1 pt-7 md:sticky md:top-4 md:col-span-3 md:col-start-4 md:pt-0 xl:col-start-3">
