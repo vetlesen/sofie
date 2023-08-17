@@ -38,11 +38,11 @@ export function IFramePreviewView(props: ComponentProps<UserViewComponent>) {
     )
   }
 
-  return (
-    <Suspense fallback={null}>
-      <PagePreviewWithSecret id={id} slug={slug} type={type} />
-    </Suspense>
-  )
+  // return (
+  //   <Suspense fallback={null}>
+  //     <PagePreviewWithSecret id={id} slug={slug} type={type} />
+  //   </Suspense>
+  // )
 }
 
 function PagePreviewWithSecret(props: {
@@ -71,9 +71,9 @@ function PagePreviewWithSecret(props: {
   //   return <div>No secret</div>
   // }
 
-  return (
-    <StyledIframe
-      src={`/api/sanity/preview?type=${type}&id=${id}&slug=${slug}&secret=${secret}`}
-    />
-  )
+  // return (
+  //   <StyledIframe
+  //     src={`/api/sanity/preview?type=${type}&id=${id}&slug=${slug}&secret=${secret}`}
+  //   />
+  // )
 }
