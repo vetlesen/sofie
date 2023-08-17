@@ -27,7 +27,7 @@ export default defineConfig({
     deskTool({
       structure: (S, context) => 
       S.list()
-      .title(`LPP`)
+      .title(`Sofie`)
       .items([
         // S.listItem()
         //   .title('Globaler')
