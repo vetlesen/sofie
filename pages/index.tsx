@@ -327,11 +327,11 @@ export default function IndexPage({ home, images }) {
     <>
       <div className="relative grid grid-cols-12 gap-y-4 p-4 md:gap-x-4 xl:gap-y-2">
         <h1 className="fixed z-[100] col-span-3 col-start-1 xl:col-span-2">
-          Sofie
+          {home.title}
         </h1>
 
         <h1 className="top-4 col-span-12 col-start-1 pt-7 md:sticky md:top-4 md:col-span-3 md:col-start-4 md:pt-0 xl:col-start-3">
-          {home.body}{' '}
+          {home.body}
           <span onClick={toggleClass} className="border-b-[1px] md:hidden">
             {isExpanded ? 'Read less' : 'Read more'}
           </span>
