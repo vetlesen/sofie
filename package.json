@@ -1,0 +1,53 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "next build",
+    "dev": "next",
+    "format": "npx prettier --write . --ignore-path .gitignore",
+    "lint": "next lint -- --ignore-path .gitignore",
+    "lint:fix": "npm run format && npm run lint -- --fix",
+    "start": "next start",
+    "type-check": "tsc --noEmit"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
+  },
+  "dependencies": {
+    "@next/font": "^13.1.1",
+    "@sanity/demo": "^1.0.1",
+    "@sanity/image-url": "^1.0.2",
+    "@sanity/orderable-document-list": "^1.1.0",
+    "@sanity/vision": "^3.15.1",
+    "@tailwindcss/typography": "^0.5.8",
+    "@types/swiper": "^6.0.0",
+    "embla-carousel-react": "^8.0.0-rc11",
+    "keen-slider": "^6.8.6",
+    "next": "^13.1.1",
+    "next-sanity": "^5.4.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-player": "^2.12.0",
+    "sanity": "^3.15.1",
+    "sanity-plugin-media": "^2.2.2",
+    "sanity-plugin-vercel-deploy": "^3.3.4",
+    "styled-components": "5.2",
+    "swiper": "^10.0.4"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.26",
+    "autoprefixer": "^10.4.13",
+    "eslint": "^8.31.0",
+    "eslint-config-next": "13.0.8-canary.5",
+    "eslint-plugin-simple-import-sort": "^8.0.0",
+    "postcss": "^8.4.20",
+    "prettier": "^2.8.1",
+    "prettier-plugin-packagejson": "^2.3.0",
+    "prettier-plugin-tailwindcss": "^0.2.1",
+    "tailwindcss": "^3.2.4",
+    "typescript": "^5.1.6"
+  },
+  "engines": {
+    "node": ">=16"
+  }
+}
