@@ -2,8 +2,8 @@
 .vscode
 
 # dependencies
-/node_modules
-/studio/node_modules
+# /node_modules
+# /studio/node_modules
 /.pnp
 .pnp.js
 
