@@ -56,7 +56,7 @@ export default function Document(home) {
           defer
         ></script>
       </Head>
-      <body className="text-white">
+      <body className="text-black">
         <Main />
         <NextScript />
       </body>

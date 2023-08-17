@@ -327,6 +327,7 @@ export default function IndexPage({ home, images }) {
     <>
       <div className="relative grid grid-cols-12 gap-y-4 p-4 md:gap-x-4 xl:gap-y-2">
         <h1 className="fixed z-[100] col-span-3 col-start-1 xl:col-span-2">
+          hallo
           <span className="fixed">L</span>
           <span className="fadeOut pl-[9.1px]">a</span>
           <span className="fadeOut">r</span>
