@@ -20,7 +20,6 @@ export const previewSecretDocumentId: `${string}.${string}` = 'preview.secret'
 
 export const useCdn = false
 
-
 function assertValue<T>(v: T | undefined, errorMessage: string): T {
   if (v === undefined) {
     throw new Error(errorMessage)
