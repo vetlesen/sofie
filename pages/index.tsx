@@ -80,14 +80,14 @@ const CustomSlider = ({ item, isMobile }) => {
           {item.title} ({item.images?.length})
         </h1>
 
-        <div className="col-span-12">
+        <div className="col-span-12 p-3">
           <Swiper
             ref={swiperRef}
             spaceBetween={0}
-            slidesPerView={'auto'}
+            slidesPerView={2}
             navigation
             modules={[Navigation, Keyboard, Zoom]}
-            centeredSlides={true}
+            // centeredSlides={true}
             shortSwipes={true}
             zoom={true}
             // onSlideChange={() => console.log('slide change')}
@@ -101,7 +101,7 @@ const CustomSlider = ({ item, isMobile }) => {
               return (
                 <SwiperSlide key={index}>
                   {content.images?._type === 'image' ? (
-                    <figure className="group cursor-pointer cursor-ew-resize">
+                    <figure className="group cursor-ew-resize cursor-pointer">
                       {content?.images?.asset?.metadata?.dimensions
                         .aspectRatio < 1 && !isMobile ? (
                         //DESKTOP PORTRAIT
@@ -196,6 +196,100 @@ const CustomSlider = ({ item, isMobile }) => {
           </Swiper>
         </div>
       </div>
+    </div>
+  )
+}
+
+const InactiveAnimation = () => {
+  const [isVisible, setIsVisible] = useState([])
+  const [isActive, setIsActive] = useState(true)
+
+  useEffect(() => {
+    let timeout
+    let interval
+
+    const inactivityDuration = 30000
+    const showInterval = 500
+    const amountOfText = 1000
+
+    const handleInactive = () => {
+      // If the website has been inactive for 1 second,
+      // start showing 'a's one by one at a 50ms interval.
+      timeout = setTimeout(() => {
+        setIsActive(false)
+        interval = setInterval(() => {
+          setIsVisible((prevVisibility) => {
+            const newVisibility = [...prevVisibility]
+            const randomIndex = Math.floor(Math.random() * newVisibility.length)
+            newVisibility[randomIndex] = true
+            return newVisibility
+          })
+        }, showInterval)
+      }, inactivityDuration)
+    }
+
+    const handleActive = () => {
+      // When the user becomes active, clear the timeout and interval,
+      // and hide all 'a's.
+      clearTimeout(timeout)
+      clearInterval(interval)
+      setIsActive(true)
+      setIsVisible(Array(amountOfText).fill(false))
+      // Call handleInactive again to start the process over
+      handleInactive()
+    }
+
+    const handleMouseOrKeyboardActivity = () => {
+      // When mouse or keyboard activity is detected,
+      // reset the visibility to hidden and clear the timeout and interval.
+      setIsVisible(Array(amountOfText).fill(false))
+      clearTimeout(timeout)
+      clearInterval(interval)
+      // Start the process over again
+      handleInactive()
+    }
+
+    const handleWheel = (event) => {
+      // Detect scroll activity (e.g., two-finger scroll on trackpads)
+      // and reset the inactivity timer.
+      if (event.deltaY !== 0) {
+        clearTimeout(timeout)
+        clearInterval(interval)
+        handleInactive()
+      }
+    }
+
+    // Add event listeners to track user activity
+    document.addEventListener('mousemove', handleMouseOrKeyboardActivity)
+    document.addEventListener('keydown', handleMouseOrKeyboardActivity)
+    document.addEventListener('wheel', handleWheel)
+
+    // Initial setup
+    setIsVisible(Array(amountOfText).fill(false))
+    handleInactive()
+
+    // Clean up event listeners and timeouts/intervals when the component unmounts
+    return () => {
+      document.removeEventListener('mousemove', handleMouseOrKeyboardActivity)
+      document.removeEventListener('keydown', handleMouseOrKeyboardActivity)
+      document.removeEventListener('wheel', handleWheel)
+      clearTimeout(timeout)
+      clearInterval(interval)
+    }
+  }, [])
+
+  return (
+    <div className="col-span-12 flex w-full flex-wrap">
+      {isVisible.map((isVisible, index) => (
+        <p
+          key={index}
+          style={{
+            visibility: isActive ? 'hidden' : isVisible ? 'visible' : 'hidden',
+          }}
+        >
+          ಠಿ ˑ̫ ಠಿ
+        </p>
+      ))}
     </div>
   )
 }
@@ -323,13 +417,24 @@ export default function IndexPage({ home, images }) {
   // is expanded, change from read more to read less
   const [isExpanded, setIsExpanded] = useState(false)
 
+  const [hovered, setHovered] = useState(false)
+
   return (
     <>
+      <div className="pointer-events-none fixed z-[100] grid h-full grid-cols-12 gap-y-4 p-4 md:gap-x-4 xl:gap-y-2">
+        <InactiveAnimation />
+      </div>
+
       <div className="relative grid grid-cols-12 gap-y-4 p-4 md:gap-x-4 xl:gap-y-2">
         <h1 className="fixed z-[100] col-span-3 col-start-1 xl:col-span-2">
-          {home.title}
+          <div
+            className={`word-container ${hovered ? 'hovered' : ''}`}
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
+          >
+            {hovered ? 'ಠ ˑ̫ ಠಿ' : 'ಠಿ ˑ̫ ಠಿ'}
+          </div>
         </h1>
-
         <h1 className="top-4 col-span-12 col-start-1 pt-7 md:sticky md:top-4 md:col-span-3 md:col-start-4 md:pt-0 xl:col-start-3">
           {home.body}
           <span onClick={toggleClass} className="border-b-[1px] md:hidden">

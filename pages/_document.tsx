@@ -50,11 +50,6 @@ export default function Document(home) {
           content="Norwegian Photographer with a documentary approach to Photography."
         />
         <meta name="twitter:image" content="" />
-        <script
-          src="https://cdn.usefathom.com/script.js"
-          data-site="COLHHRVR"
-          defer
-        ></script>
       </Head>
       <body className="text-black">
         <Main />
