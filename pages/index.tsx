@@ -66,21 +66,36 @@ const CustomSlider = ({ item, isMobile }) => {
   const swiperRef = useRef<any>()
 
   const handleLoaded = () => {
-    console.log('swiperRef', swiperRef)
+    // console.log('swiperRef', swiperRef)
     if (swiperRef.current) {
       swiperRef.current.swiper.update()
       swiperRef.current.swiper.slideTo(0)
     }
   }
-
+  console.log(item)
   return (
-    <div className="carouselrelative col-span-12 pt-40 first:pt-0 md:gap-x-4 xl:pt-80">
+    <div className="carouselrelative col-span-12 gap-x-4 pt-32">
       <div className="relative relative mt-6 grid grid-cols-12 first:mt-0 md:mt-0 md:gap-x-4">
-        <h1 className="image--title sticky top-4 z-50 col-span-6 col-start-4 mb-48 px-3 text-left md:col-start-3 md:col-start-4 md:gap-x-4">
-          {item.title} ({item.images?.length})
+        <h1 className="z-50 col-span-6 col-start-1 col-start-2 gap-x-4 px-4">
+          {item.title}
         </h1>
-
-        <div className="col-span-12 p-3">
+        <h1 className="z-50 col-span-6 col-start-1 gap-x-4 px-4 pb-4 pt-10  ">
+          {item.year}
+        </h1>
+        <h1 className="z-50 col-span-6 col-start-1 gap-x-4 px-4 indent-32">
+          {item.body}
+        </h1>
+        <div className="col-span-3 col-start-9">
+          <ul>
+            {item.infolist?.map((item, index) => (
+              <li key={index} className="flex">
+                <div className="w-[110px]">{item.info}</div>
+                {item.content}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="col-span-12 mt-6 p-3">
           <Swiper
             ref={swiperRef}
             spaceBetween={0}
@@ -97,7 +112,7 @@ const CustomSlider = ({ item, isMobile }) => {
             }}
           >
             {item.images?.map((content, index) => {
-              console.log(content)
+              // console.log(content)
               return (
                 <SwiperSlide key={index}>
                   {content.images?._type === 'image' ? (
@@ -383,14 +398,6 @@ export default function IndexPage({ home, images }) {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
-  // toggle about
-  const [isToggled, setIsToggled] = useState(false)
-
-  const toggleClass = () => {
-    setIsToggled((prevState) => !prevState)
-    setIsExpanded((prevState) => !prevState)
-  }
-
   // get hight of div with more information on mobile
   const divRef = useRef(null)
   const [divHeight, setDivHeight] = useState(0)
@@ -414,9 +421,6 @@ export default function IndexPage({ home, images }) {
     }
   }, [])
 
-  // is expanded, change from read more to read less
-  const [isExpanded, setIsExpanded] = useState(false)
-
   const [hovered, setHovered] = useState(false)
 
   return (
@@ -435,108 +439,20 @@ export default function IndexPage({ home, images }) {
             {hovered ? 'ಠ ˑ̫ ಠಿ' : 'ಠಿ ˑ̫ ಠಿ'}
           </div>
         </h1>
-        <h1 className="top-4 col-span-12 col-start-1 pt-7 md:sticky md:top-4 md:col-span-3 md:col-start-4 md:pt-0 xl:col-start-3">
-          {home.body}
-          <span onClick={toggleClass} className="border-b-[1px] md:hidden">
-            {isExpanded ? 'Read less' : 'Read more'}
-          </span>
-        </h1>
-
-        <h1 className="col-span-12 col-start-1 hidden pb-4 md:col-span-4 md:col-start-8 md:block xl:col-span-3 xl:col-start-10">
-          {home.info}
-        </h1>
-
-        {/* hehe denne her er juks og må ha denne! */}
-        <div className="pointer-events-none invisible top-4 z-50 col-span-5 col-start-1 flex-col gap-2 text-black md:col-span-8 md:col-start-1 md:flex md:hidden md:flex-row">
-          <h1 className="">Contact</h1>
-          {/* <ul>
+        <h1 className="col-span-3 col-start-1 pt-7">{home.body}</h1>
+        <div className="col-span-3 col-start-5 pt-7">
+          <ul>
             {home.contact.map((item, index) => (
-              <Link key={index} href={item.href} target="_blank">
-                <li>{item.contact}</li>
-              </Link>
-            ))}
-          </ul> */}
-        </div>
-        {/* Avslutter her  */}
-
-        {/* Contact mobil */}
-        <div className="fixedContact sticky top-4 z-50 col-span-6 col-start-7 flex flex-col gap-2 md:col-span-3 md:col-start-10 md:hidden md:flex-row md:gap-6 xl:col-start-10">
-          <h1
-            className="h-fit cursor-pointer hover:underline	"
-            onClick={handleScrollToTop}
-          >
-            Contact
-          </h1>
-          <ul className="hideThis">
-            {home.contact.map((item, index) => (
-              <Link key={index} href={item.href} target="_blank">
-                <li>{item.contact}</li>
-              </Link>
+              <li className="flex">
+                <div className="w-[120px]">{item.contact}</div>
+                <Link key={index} href={item.href} target="_blank">
+                  {item.title}
+                </Link>
+              </li>
             ))}
           </ul>
         </div>
-        {/* contact */}
-
-        {/* hehe denne her er juks og må ha denne! */}
-        <div className="pointer-events-none invisible top-4 z-50 col-span-5 col-start-1 flex-col gap-2 text-black md:col-span-8 md:col-start-1 md:flex md:flex-row">
-          <h1 className="">Contact</h1>
-          <ul className="hidden md:flex">
-            {home.contact.map((item, index) => (
-              <Link key={index} href={item.href} target="_blank">
-                <li>{item.contact}</li>
-              </Link>
-            ))}
-          </ul>
-        </div>
-        {/* Avslutter her  */}
-
-        {/* Contact  desktop */}
-        <div className="fixedContact sticky top-4 z-50 col-span-6 col-start-7 flex hidden flex-col gap-2 md:col-span-3 md:col-start-10 md:flex md:flex-row md:gap-6 xl:col-start-10">
-          <h1
-            className="h-fit cursor-pointer hover:underline	"
-            onClick={handleScrollToTop}
-          >
-            Contact
-          </h1>
-          <ul className="hideThis">
-            {home.contact.map((item, index) => (
-              <Link key={index} href={item.href} target="_blank">
-                <li>{item.contact}</li>
-              </Link>
-            ))}
-          </ul>
-        </div>
-        {/* contact */}
-
-        {/* hide on desktop */}
-        <div
-          className={
-            isToggled
-              ? `move--from--top opacity-1 col-span-12 col-start-1 grid h-[300px] transition-all duration-300 ease-in`
-              : 'move--from--top col-span-12 col-start-1 grid h-[1px] opacity-0 transition-all duration-300 ease-in'
-          }
-        >
-          <h1 className="col-span-12 col-start-1 pb-4 md:col-span-4 md:col-start-8 md:hidden xl:col-span-3 xl:col-start-10">
-            {home.info}
-          </h1>
-          <h1 className="top-4 col-span-6 col-start-1 md:col-span-2 md:col-start-8 md:block md:hidden xl:col-start-6">
-            Selected clients
-          </h1>
-          <ul className="top-4 col-span-6 col-start-7  md:col-span-3 md:col-start-8 md:block md:hidden xl:col-span-2">
-            {home.clients.map((item, index) => (
-              <li key={index}>{item}</li>
-            ))}
-          </ul>
-        </div>
-        {/* Selected clients hidden on phone */}
-        <h1 className="top-4 col-span-6 col-start-1 hidden md:col-span-2 md:col-start-8 md:block xl:col-start-6">
-          Selected clients
-        </h1>
-        <ul className="top-4 col-span-12 col-start-7 hidden md:col-span-3 md:col-start-8 md:block xl:col-span-2">
-          {home.clients.map((item, index) => (
-            <li key={index}>{item}</li>
-          ))}
-        </ul>
+        <h1 className="col-span-4 col-start-9 pt-7">{home.info}</h1>
       </div>
 
       {/* SWIPER!!! */}
@@ -550,27 +466,18 @@ export default function IndexPage({ home, images }) {
           />
         ))}
       </div>
-      {/* Hide this to calculate height:-) */}
-      <div
-        ref={divRef}
-        className={
-          'move--from--top invisible col-span-12 col-start-1 grid duration-300 ease-in'
-        }
-      >
-        <h1 className="col-span-12 col-start-1 pb-4 md:col-span-4 md:col-start-8 md:hidden xl:col-span-3 xl:col-start-10">
-          {home.info}
-          <p>{divHeight}</p>
-        </h1>
-        <h1 className="top-4 col-span-6 col-start-1 md:col-span-2 md:col-start-8 md:block md:hidden xl:col-start-6">
-          Selected clients
-        </h1>
-        <ul className="top-4 col-span-6 col-start-7  md:col-span-3 md:col-start-8 md:block md:hidden xl:col-span-2">
-          {home.clients.map((item, index) => (
-            <li key={index}>{item}</li>
-          ))}
-        </ul>
+      <div className="relative grid grid-cols-12 flex-col gap-y-4 p-4">
+        <div className="flex flex-col">
+          <h1
+            onClick={handleScrollToTop}
+            className="col-span-5 col-start-1 hover:underline"
+          >
+            back to top
+          </h1>
+          <h1 className="pt-4">Typeface Helvetica</h1>
+          <h1>Design & develpment Jonas Vetlesen</h1>
+        </div>
       </div>
-      {/* Hide this to calculate height:-) */}
     </>
   )
 }

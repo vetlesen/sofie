@@ -20,6 +20,43 @@ export const schema: { types: SchemaTypeDefinition[] } = {
           validation: Rule => Rule.required().error('Needs a title'),
         },
         {
+          name: 'year',
+          type: 'string',
+          title: 'Year',
+          validation: Rule => Rule.required().error('Needs a title'),
+        },
+        {
+          name: 'body',
+          type: 'text',
+          title: 'Description',
+          validation: Rule => Rule.required().error('Needs a title'),
+        },
+                {
+          name: 'infolist',
+          title: 'Information list',
+          type: 'array',
+          of: [
+            {
+              type: "object",
+              name: "objects",
+              title: "Information",
+              fields: [
+                {
+                  title: 'Name',
+                  description: 'Type, size, studio, client, collaborators..',
+                  name: 'info',
+                  type: 'string',
+                },
+                {
+                  title: 'Content',
+                  name: 'content',
+                  type: 'string',
+                }
+              ],
+            },
+          ]
+        },
+        {
           name: "images",
           title: "Content",
           type: "array",
@@ -93,7 +130,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
         {
           name: 'info',
           title: 'Contact information',
-          type: 'string',
+          type: 'text',
         },
         {
           name: 'contact',
@@ -112,6 +149,12 @@ export const schema: { types: SchemaTypeDefinition[] } = {
                 type: 'string',
               },
               {
+                name: 'title',
+                title: 'title',
+                description: 'Various ways of contact e.g. instagram, e-mail, phone..',
+                type: 'string',
+              },
+              {
               title: "Link",
               name: "href",
               type: "url",
@@ -122,19 +165,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
               }
             ]
           }
-          ]
-          
-        },
-        {
-          name: 'clients',
-          title: 'Selected clients',
-          type: 'array',
-          of: [
-            {
-              title: 'client',
-              name: 'client',
-              type: 'string',
-            }
           ]
         },
         {
