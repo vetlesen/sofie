@@ -443,9 +443,9 @@ export default function IndexPage({ home, images }) {
         <div className="col-span-3 col-start-5 pt-7">
           <ul>
             {home.contact.map((item, index) => (
-              <li className="flex">
+              <li className="flex" key={index}>
                 <div className="w-[120px]">{item.contact}</div>
-                <Link key={index} href={item.href} target="_blank">
+                <Link href={item.href} target="_blank">
                   {item.title}
                 </Link>
               </li>
@@ -472,10 +472,10 @@ export default function IndexPage({ home, images }) {
             onClick={handleScrollToTop}
             className="col-span-5 col-start-1 hover:underline"
           >
-            back to top
+            Back to top
           </h1>
-          <h1 className="pt-4">Typeface Helvetica</h1>
-          <h1>Design & develpment Jonas Vetlesen</h1>
+          <h1 className="pt-4 opacity-50">Typeface Helvetica</h1>
+          <h1 className="opacity-50">Design & develpment Jonas Vetlesen</h1>
         </div>
       </div>
     </>
