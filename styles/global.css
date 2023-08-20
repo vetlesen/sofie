@@ -106,7 +106,7 @@ a:hover {
 
 .swiper-wrapper {
   width: 100vw;
-  align-items: center;
+  align-items: top;
 }
 
 /* TESTING */

@@ -72,20 +72,19 @@ const CustomSlider = ({ item, isMobile }) => {
       swiperRef.current.swiper.slideTo(0)
     }
   }
-  console.log(item)
   return (
-    <div className="carouselrelative col-span-12 gap-x-4 pt-32">
-      <div className="relative relative mt-6 grid grid-cols-12 first:mt-0 md:mt-0 md:gap-x-4">
-        <h1 className="z-50 col-span-6 col-start-1 col-start-2 gap-x-4 px-4">
+    <div className="pt-16 md:pt-32">
+      <div className="relative grid w-full grid-cols-12 gap-x-4 p-4">
+        <h1 className="col-span-12 col-start-1 gap-x-4 px-4 indent-16 md:col-span-6 md:indent-32">
           {item.title}
         </h1>
-        <h1 className="z-50 col-span-6 col-start-1 gap-x-4 px-4 pb-4 pt-10  ">
+        <h1 className="col-span-12 col-span-12 col-start-1 gap-x-4 pb-4 pt-10">
           {item.year}
         </h1>
-        <h1 className="z-50 col-span-6 col-start-1 gap-x-4 px-4 indent-32">
+        <h1 className="col-span-12 col-start-1 gap-x-4 indent-16 md:col-span-6 md:indent-32">
           {item.body}
         </h1>
-        <div className="col-span-3 col-start-9">
+        <div className="col-span-12 col-start-1 gap-x-4 pt-4 md:col-span-4 md:col-start-9 md:pt-0">
           <ul>
             {item.infolist?.map((item, index) => (
               <li key={index} className="flex">
@@ -95,121 +94,120 @@ const CustomSlider = ({ item, isMobile }) => {
             ))}
           </ul>
         </div>
-        <div className="col-span-12 mt-6 p-3">
-          <Swiper
-            ref={swiperRef}
-            spaceBetween={0}
-            slidesPerView={2}
-            navigation
-            modules={[Navigation, Keyboard, Zoom]}
-            // centeredSlides={true}
-            shortSwipes={true}
-            zoom={true}
-            // onSlideChange={() => console.log('slide change')}
-            // onSwiper={(swiper) => console.log(swiper)}
-            keyboard={{
-              enabled: true,
-            }}
-          >
-            {item.images?.map((content, index) => {
-              // console.log(content)
-              return (
-                <SwiperSlide key={index}>
-                  {content.images?._type === 'image' ? (
-                    <figure className="group cursor-ew-resize cursor-pointer">
-                      {content?.images?.asset?.metadata?.dimensions
-                        .aspectRatio < 1 && !isMobile ? (
-                        //DESKTOP PORTRAIT
-                        <Image
-                          src={content.images.asset.url}
-                          placeholder="blur"
-                          blurDataURL={content?.images?.asset?.metadata?.lqip}
-                          alt=""
-                          width={1000}
-                          height={0}
-                          sizes="98vw"
-                          loading="eager"
-                          style={{
-                            maxWidth: '50vh',
-                            maxHeight: '80vh',
-                            marginRight: '10px',
-                            marginLeft: '10px',
-                          }}
-                        />
-                      ) : content?.images?.asset?.metadata.dimensions
-                          .aspectRatio > 1 && isMobile ? (
-                        // MOBILE LANDSCAPE
-                        <Image
-                          src={content?.images?.asset?.url}
-                          placeholder="blur"
-                          blurDataURL={content?.images?.asset?.metadata?.lqip}
-                          alt=""
-                          width={1000}
-                          height={0}
-                          sizes="98vw"
-                          loading="eager"
-                          style={{
-                            maxWidth: '40vh',
-                            maxHeight: '50vh',
-                            marginRight: '10px',
-                            marginLeft: '10px',
-                          }}
-                        />
-                      ) : content?.images?.asset?.metadata.dimensions
-                          .aspectRatio < 1 && isMobile ? (
-                        // MOBILE PORTRAIT
-                        <Image
-                          src={content?.images?.asset?.url}
-                          placeholder="blur"
-                          blurDataURL={content?.images?.asset?.metadata?.lqip}
-                          alt=""
-                          width={1000}
-                          height={0}
-                          sizes="98vw"
-                          loading="eager"
-                          style={{
-                            maxWidth: '40vh',
-                            maxHeight: '70vh',
-                            marginRight: '10px',
-                            marginLeft: '10px',
-                          }}
-                        />
-                      ) : (
-                        // DESKTOP LANDSCAPE
-                        <Image
-                          src={content?.images?.asset?.url}
-                          placeholder="blur"
-                          blurDataURL={content?.images?.asset?.metadata?.lqip}
-                          alt=""
-                          width={1000}
-                          height={0}
-                          sizes="98vw"
-                          loading="eager"
-                          style={{
-                            maxWidth: '90vh',
-                            maxHeight: '80vh',
-                            marginRight: '10px',
-                            marginLeft: '10px',
-                          }}
-                        />
-                      )}
-                      <figcaption>
-                        <h1 className=" mx-[10px] pt-2 opacity-0 duration-300 ease-in-out group-hover:opacity-100">
-                          {content?.images?.asset?.description}
-                        </h1>
-                      </figcaption>
-                    </figure>
-                  ) : (
-                    <CustomVideoPlayer
-                      lazyLoadCallback={handleLoaded}
-                      url={content?.videoUrl}
-                    />
-                  )}
-                </SwiperSlide>
-              )
-            })}
-          </Swiper>
-        </div>
+      </div>
+      <div className="col-span-12 mt-6">
+        <Swiper
+          ref={swiperRef}
+          spaceBetween={0}
+          slidesPerView={isMobile ? 1 : 1.2}
+          navigation
+          modules={[Navigation, Keyboard, Zoom]}
+          // centeredSlides={true}
+          shortSwipes={true}
+          zoom={true}
+          // onSlideChange={() => console.log('slide change')}
+          // onSwiper={(swiper) => console.log(swiper)}
+          keyboard={{
+            enabled: true,
+          }}
+        >
+          {item.images?.map((content, index) => {
+            return (
+              <SwiperSlide key={index}>
+                {content.images?._type === 'image' ? (
+                  <figure className="group cursor-ew-resize cursor-pointer">
+                    {content?.images?.asset?.metadata?.dimensions.aspectRatio <
+                      1 && !isMobile ? (
+                      //DESKTOP PORTRAIT
+                      <Image
+                        src={content.images.asset.url}
+                        placeholder="blur"
+                        blurDataURL={content?.images?.asset?.metadata?.lqip}
+                        alt=""
+                        width={1000}
+                        height={0}
+                        sizes="98vw"
+                        loading="eager"
+                        style={{
+                          maxWidth: '50vh',
+                          maxHeight: '80vh',
+                          marginRight: '20px',
+                          marginLeft: '20px',
+                        }}
+                      />
+                    ) : content?.images?.asset?.metadata.dimensions
+                        .aspectRatio > 1 && isMobile ? (
+                      // MOBILE LANDSCAPE
+                      <Image
+                        src={content?.images?.asset?.url}
+                        placeholder="blur"
+                        blurDataURL={content?.images?.asset?.metadata?.lqip}
+                        alt=""
+                        width={1000}
+                        height={0}
+                        sizes="98vw"
+                        loading="eager"
+                        style={{
+                          maxWidth: '40vh',
+                          maxHeight: '50vh',
+                          marginRight: '20px',
+                          marginLeft: '20px',
+                        }}
+                      />
+                    ) : content?.images?.asset?.metadata.dimensions
+                        .aspectRatio < 1 && isMobile ? (
+                      // MOBILE PORTRAIT
+                      <Image
+                        src={content?.images?.asset?.url}
+                        placeholder="blur"
+                        blurDataURL={content?.images?.asset?.metadata?.lqip}
+                        alt=""
+                        width={1000}
+                        height={0}
+                        sizes="98vw"
+                        loading="eager"
+                        style={{
+                          maxWidth: '40vh',
+                          maxHeight: '70vh',
+                          marginRight: '20px',
+                          marginLeft: '20px',
+                        }}
+                      />
+                    ) : (
+                      // DESKTOP LANDSCAPE
+                      <Image
+                        src={content?.images?.asset?.url}
+                        placeholder="blur"
+                        blurDataURL={content?.images?.asset?.metadata?.lqip}
+                        alt=""
+                        width={1000}
+                        height={0}
+                        sizes="98vw"
+                        loading="eager"
+                        style={{
+                          maxWidth: '90vh',
+                          maxHeight: '80vh',
+                          marginRight: '20px',
+                          marginLeft: '20px',
+                        }}
+                      />
+                    )}
+                    <figcaption>
+                      <h1 className=" mx-[20px] pt-2 opacity-0 duration-300 ease-in-out group-hover:opacity-100">
+                        {content?.images?.asset?.description}
+                      </h1>
+                    </figcaption>
+                  </figure>
+                ) : (
+                  <CustomVideoPlayer
+                    lazyLoadCallback={handleLoaded}
+                    url={content?.videoUrl}
+                  />
+                )}
+              </SwiperSlide>
+            )
+          })}
+        </Swiper>
       </div>
     </div>
   )
@@ -241,17 +239,6 @@ const InactiveAnimation = () => {
           })
         }, showInterval)
       }, inactivityDuration)
-    }
-
-    const handleActive = () => {
-      // When the user becomes active, clear the timeout and interval,
-      // and hide all 'a's.
-      clearTimeout(timeout)
-      clearInterval(interval)
-      setIsActive(true)
-      setIsVisible(Array(amountOfText).fill(false))
-      // Call handleInactive again to start the process over
-      handleInactive()
     }
 
     const handleMouseOrKeyboardActivity = () => {
@@ -422,15 +409,16 @@ export default function IndexPage({ home, images }) {
   }, [])
 
   const [hovered, setHovered] = useState(false)
-
+  console.log(home)
   return (
     <>
-      <div className="pointer-events-none fixed z-[100] grid h-full grid-cols-12 gap-y-4 p-4 md:gap-x-4 xl:gap-y-2">
+      {/* inactive section */}
+      {/* <div className="pointer-events-none fixed z-[100] grid h-full grid-cols-12 gap-y-4 p-4 md:gap-x-4 xl:gap-y-2">
         <InactiveAnimation />
-      </div>
-
-      <div className="relative grid grid-cols-12 gap-y-4 p-4 md:gap-x-4 xl:gap-y-2">
-        <h1 className="fixed z-[100] col-span-3 col-start-1 xl:col-span-2">
+      </div> */}
+      {/* top section */}
+      <div className="grid grid-cols-12 gap-x-4 p-4">
+        <h1 className="fixed z-[100] col-span-12 col-start-1 md:col-span-3 xl:col-span-2">
           <div
             className={`word-container ${hovered ? 'hovered' : ''}`}
             onMouseEnter={() => setHovered(true)}
@@ -439,12 +427,24 @@ export default function IndexPage({ home, images }) {
             {hovered ? 'ಠ ˑ̫ ಠಿ' : 'ಠಿ ˑ̫ ಠಿ'}
           </div>
         </h1>
-        <h1 className="col-span-3 col-start-1 pt-7">{home.body}</h1>
-        <div className="col-span-3 col-start-5 pt-7">
+        <div className="relative col-span-12 col-start-1 h-52 md:col-span-3 md:col-start-10">
+          <Image
+            src={home?.seoimage?.asset?.url}
+            alt=""
+            sizes="98vw"
+            loading="eager"
+            fill
+            style={{
+              objectFit: 'contain',
+            }}
+          ></Image>
+        </div>
+        <h1 className="col-span-12 col-start-1 md:col-span-3">{home.body}</h1>
+        <div className="col-span-12 col-start-1 md:col-span-4 md:col-start-4">
           <ul>
             {home.contact.map((item, index) => (
               <li className="flex" key={index}>
-                <div className="w-[120px]">{item.contact}</div>
+                <div className="w-[70px]">{item.contact}</div>
                 <Link href={item.href} target="_blank">
                   {item.title}
                 </Link>
@@ -452,12 +452,13 @@ export default function IndexPage({ home, images }) {
             ))}
           </ul>
         </div>
-        <h1 className="col-span-4 col-start-9 pt-7">{home.info}</h1>
+        <h1 className="col-span-12 col-start-1 md:col-span-4 md:col-start-9">
+          {home.info}
+        </h1>
       </div>
 
-      {/* SWIPER!!! */}
-
-      <div className="relative col-span-12 grid pb-60">
+      {/* swiper */}
+      <div className="relative">
         {images.map((item, index) => (
           <CustomSlider
             item={item}
@@ -466,12 +467,11 @@ export default function IndexPage({ home, images }) {
           />
         ))}
       </div>
-      <div className="relative grid grid-cols-12 flex-col gap-y-4 p-4">
-        <div className="flex flex-col">
-          <h1
-            onClick={handleScrollToTop}
-            className="col-span-5 col-start-1 hover:underline"
-          >
+
+      {/* footer */}
+      <div className="relative mt-12 grid grid-cols-12 flex-col gap-y-4 p-4">
+        <div className="col-span-5 col-start-1 flex flex-col">
+          <h1 onClick={handleScrollToTop} className="hover:underline">
             Back to top
           </h1>
           <h1 className="pt-4 opacity-50">Typeface Helvetica</h1>
@@ -487,6 +487,10 @@ export async function getStaticProps() {
     *[_type == "globals"][0]
     {
       ...,
+      seoimage{
+          ...,
+          asset->
+        },
       "images": *[_type=='images']{ images },
         asset->
       }
@@ -511,10 +515,6 @@ export async function getStaticProps() {
         thumbnail{
             asset->
           }
-        },
-        seoimage[]{
-          ...,
-          asset->
         },
      }
   `)
