@@ -75,7 +75,7 @@ const CustomSlider = ({ item, isMobile }) => {
   return (
     <div className="pt-16 md:pt-32">
       <div className="relative grid w-full grid-cols-12 gap-x-4 p-4">
-        <h1 className="col-span-12 col-start-1 gap-x-4 px-4 indent-16 md:col-span-6 md:indent-32">
+        <h1 className="col-span-12 col-start-1 gap-x-4 indent-16 md:col-span-6 md:indent-32">
           {item.title}
         </h1>
         <h1 className="col-span-12 col-span-12 col-start-1 gap-x-4 pb-4 pt-10">
@@ -99,7 +99,7 @@ const CustomSlider = ({ item, isMobile }) => {
         <Swiper
           ref={swiperRef}
           spaceBetween={0}
-          slidesPerView={isMobile ? 1 : 1.2}
+          slidesPerView={isMobile ? 1 : 1.1}
           navigation
           modules={[Navigation, Keyboard, Zoom]}
           // centeredSlides={true}
@@ -148,7 +148,7 @@ const CustomSlider = ({ item, isMobile }) => {
                         sizes="98vw"
                         loading="eager"
                         style={{
-                          maxWidth: '40vh',
+                          maxWidth: '100vw',
                           maxHeight: '50vh',
                           marginRight: '20px',
                           marginLeft: '20px',
@@ -185,15 +185,15 @@ const CustomSlider = ({ item, isMobile }) => {
                         sizes="98vw"
                         loading="eager"
                         style={{
-                          maxWidth: '90vh',
-                          maxHeight: '80vh',
+                          maxWidth: '90vw',
+                          maxHeight: '90vh',
                           marginRight: '20px',
                           marginLeft: '20px',
                         }}
                       />
                     )}
                     <figcaption>
-                      <h1 className=" mx-[20px] pt-2 opacity-0 duration-300 ease-in-out group-hover:opacity-100">
+                      <h1 className="mx-[20px] pt-2 opacity-20 duration-300 ease-in-out group-hover:opacity-100">
                         {content?.images?.asset?.description}
                       </h1>
                     </figcaption>
@@ -413,11 +413,11 @@ export default function IndexPage({ home, images }) {
   return (
     <>
       {/* inactive section */}
-      {/* <div className="pointer-events-none fixed z-[100] grid h-full grid-cols-12 gap-y-4 p-4 md:gap-x-4 xl:gap-y-2">
+      <div className="pointer-events-none fixed z-[100] grid h-full grid-cols-12 gap-y-4 p-4 md:gap-x-4 xl:gap-y-2">
         <InactiveAnimation />
-      </div> */}
+      </div>
       {/* top section */}
-      <div className="grid grid-cols-12 gap-x-4 p-4">
+      <div className="grid grid-cols-12 gap-x-4 gap-y-4 p-4">
         <h1 className="fixed z-[100] col-span-12 col-start-1 md:col-span-3 xl:col-span-2">
           <div
             className={`word-container ${hovered ? 'hovered' : ''}`}
@@ -469,7 +469,7 @@ export default function IndexPage({ home, images }) {
       </div>
 
       {/* footer */}
-      <div className="relative mt-12 grid grid-cols-12 flex-col gap-y-4 p-4">
+      <div className="relative mt-32 grid grid-cols-12 flex-col gap-y-4 p-4">
         <div className="col-span-5 col-start-1 flex flex-col">
           <h1 onClick={handleScrollToTop} className="hover:underline">
             Back to top
