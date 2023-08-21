@@ -189,7 +189,7 @@ const CustomSlider = ({ item, isMobile }) => {
             return (
               <SwiperSlide key={index}>
                 {content.images?._type === 'image' ? (
-                  <figure className="group h-[80vh] cursor-ew-resize cursor-pointer">
+                  <figure className="group h-[55vh] cursor-ew-resize cursor-pointer md:h-[80vh]">
                     <Image
                       src={content.images.asset.url}
                       placeholder="blur"
