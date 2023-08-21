@@ -108,7 +108,7 @@ const CustomSlider = ({ item, isMobile }) => {
         <h1 className="col-span-12 col-span-12 col-start-1 gap-x-4 pb-4 pt-10">
           {item.year}
         </h1>
-        <h1 className="col-span-12 col-start-1 gap-x-4 indent-16 md:col-span-6 md:indent-32">
+        <h1 className="col-span-12 col-start-1 gap-x-4 indent-16 md:col-span-7 md:indent-32">
           {item.body}
         </h1>
         <div className="col-span-12 col-start-1 gap-x-4 pt-4 md:col-span-4 md:col-start-9 md:pt-0">
@@ -303,7 +303,7 @@ const InactiveAnimation = () => {
             visibility: isActive ? 'hidden' : isVisible ? 'visible' : 'hidden',
           }}
         >
-          ಠಿ ˑ̫ ಠಿ
+          ಠಿ ˑ̫ ಠ
         </p>
       ))}
     </div>
@@ -364,17 +364,38 @@ export default function IndexPage({ home, images }) {
         <InactiveAnimation />
       </div>
       {/* top section */}
-      <div className="grid grid-cols-12 gap-x-4 gap-y-4 p-4">
-        <h1 className="fixed z-[100] col-span-12 col-start-1 md:col-span-3 xl:col-span-2">
-          <div
-            className={`word-container ${hovered ? 'hovered' : ''}`}
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
-          >
-            {hovered ? 'ಠ ˑ̫ ಠಿ' : 'ಠಿ ˑ̫ಠಿ'}
-          </div>
-        </h1>
-        <div className="relative col-span-6 col-start-6 h-52 md:col-span-3 md:col-start-10">
+      <h1 className="fixed z-[100] pl-4">
+        <div
+          className={`word-container ${hovered ? 'hovered' : ''}`}
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+        >
+          {hovered ? 'ಠ ˑ̫ ಠಿ' : 'ಠಿ ˑ̫ ಠ'}
+        </div>
+      </h1>
+      <div className="mt-4 grid grid-cols-12 gap-x-4 gap-y-4 p-4 pt-7">
+        <h1 className="col-span-12 col-start-1 md:col-span-3">{home.body}</h1>
+        {/* <h1 className="col-span-12 col-start-1 md:col-span-4 md:col-start-4">
+          {home.info}
+        </h1> */}
+        <div className="col-span-12 col-start-1 md:col-span-4 md:col-start-4">
+          <h1 className="pb-4">{home.info}</h1>
+          <ul>
+            {home.contact.map((item, index) => (
+              <li className="flex" key={index}>
+                <div className="w-[70px]">{item.contact}</div>
+                <Link
+                  className="hover:underline"
+                  href={item.href}
+                  target="_blank"
+                >
+                  {item.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="relative col-span-6 col-start-6 h-[200px] cursor-help md:col-span-3 md:col-start-10">
           <Image
             src={home?.seoimage?.asset?.url}
             alt=""
@@ -382,28 +403,11 @@ export default function IndexPage({ home, images }) {
             loading="eager"
             fill
             style={{
-              objectFit: 'contain',
+              objectFit: 'cover',
             }}
           ></Image>
         </div>
-        <h1 className="col-span-12 col-start-1 md:col-span-3">{home.body}</h1>
-        <div className="col-span-12 col-start-1 md:col-span-4 md:col-start-4">
-          <ul>
-            {home.contact.map((item, index) => (
-              <li className="flex" key={index}>
-                <div className="w-[70px]">{item.contact}</div>
-                <Link href={item.href} target="_blank">
-                  {item.title}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <h1 className="col-span-12 col-start-1 md:col-span-4 md:col-start-9">
-          {home.info}
-        </h1>
       </div>
-
       {/* swiper */}
       <div className="relative">
         {images.map((item, index) => (
@@ -414,7 +418,6 @@ export default function IndexPage({ home, images }) {
           />
         ))}
       </div>
-
       {/* footer */}
       <div className="relative mt-32 grid grid-cols-12 flex-col gap-y-4 p-4">
         <div className="col-span-5 col-start-1 flex flex-col">

@@ -27,6 +27,15 @@ li {
   -moz-osx-font-smoothing: grayscale;
 }
 
+h1 {
+  white-space: pre-wrap;
+}
+
+::selection {
+  background: rgba(242, 255, 0, 0.6);
+  color: rgb(0, 0, 0);
+}
+
 .swiper {
   height: 100%;
   cursor: none !important;
@@ -37,10 +46,6 @@ li {
 }
 
 figure {
-  cursor: none !important;
-}
-
-img {
   cursor: none !important;
 }
 
