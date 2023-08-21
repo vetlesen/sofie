@@ -32,12 +32,24 @@ li {
   cursor: none !important;
 }
 
+.swiper-slide {
+  cursor: none !important;
+}
+
+figure {
+  cursor: none !important;
+}
+
+img {
+  cursor: none !important;
+}
+
 .slidePrev-btn:hover {
-  cursor: none;
+  cursor: none !important;
 }
 
 .slideNext-btn:hover {
-  cursor: none;
+  cursor: none !important;
 }
 
 .swiper {

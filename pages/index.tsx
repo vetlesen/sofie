@@ -122,7 +122,7 @@ const CustomSlider = ({ item, isMobile }) => {
           </ul>
         </div>
       </div>
-      <div className="relative col-span-12 mt-6">
+      <div className="relative col-span-12 mt-6 cursor-none">
         {!isMobile && (
           <div
             onMouseEnter={handleMouseEnterPrev}
@@ -172,7 +172,6 @@ const CustomSlider = ({ item, isMobile }) => {
           slidesPerView={isMobile ? 1 : 2}
           shortSwipes={true}
           zoom={true}
-          centeredSlides={true}
           // onSlideChange={() => console.log('slide change')}
           // onSwiper={(swiper) => console.log(swiper)}
           keyboard={{
