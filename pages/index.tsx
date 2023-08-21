@@ -420,12 +420,15 @@ export default function IndexPage({ home, images }) {
       </div>
       {/* footer */}
       <div className="relative mt-32 grid grid-cols-12 flex-col gap-y-4 p-4">
-        <div className="col-span-5 col-start-1 flex flex-col">
-          <h1 onClick={handleScrollToTop} className="hover:underline">
+        <div className="col-span-12 col-start-1 flex flex-col">
+          <h1
+            onClick={handleScrollToTop}
+            className="cursor-n-resize hover:underline"
+          >
             Back to top
           </h1>
-          <h1 className="pt-4 opacity-50">Typeface Helvetica</h1>
-          <h1 className="opacity-50">Design & develpment Jonas Vetlesen</h1>
+          <h1 className="pt-4 opacity-20">Typeface Helvetica</h1>
+          <h1 className="opacity-20">Design & develpment Jonas Vetlesen</h1>
         </div>
       </div>
     </>

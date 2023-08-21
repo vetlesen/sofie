@@ -23,6 +23,7 @@ a,
 li {
   font-family: Helvetica, sans-serif;
   font-weight: normal;
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -86,4 +87,6 @@ figcaption {
   pointer-events: none; /* This prevents the follower div from interfering with mouse events on the container */
   z-index: 1000;
   transform: translate(-50%, -50%);
+  font-weight: 200 !important;
+  font-family: Helvetica !important;
 }
