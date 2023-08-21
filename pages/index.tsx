@@ -66,16 +66,17 @@ const CustomSlider = ({ item, isMobile }) => {
   const swiperRef = useRef<any>()
 
   const handleLoaded = () => {
-    // console.log('swiperRef', swiperRef)
+    console.log('swiperRef', swiperRef)
     if (swiperRef.current) {
       swiperRef.current.swiper.update()
       swiperRef.current.swiper.slideTo(0)
     }
   }
+
   return (
     <div className="pt-16 md:pt-32">
       <div className="relative grid w-full grid-cols-12 gap-x-4 p-4">
-        <h1 className="col-span-12 col-start-1 gap-x-4 indent-16 md:col-span-6 md:indent-32">
+        <h1 className="col-span-12 col-start-1 gap-x-4 indent-16 md:col-span-12 md:indent-32">
           {item.title}
         </h1>
         <h1 className="col-span-12 col-span-12 col-start-1 gap-x-4 pb-4 pt-10">
@@ -95,14 +96,14 @@ const CustomSlider = ({ item, isMobile }) => {
           </ul>
         </div>
       </div>
-      <div className="col-span-12 mt-6">
+      <div className="relative col-span-12 mt-6">
+        <div className="slidePrev-btn  absolute left-0 z-[100] h-full w-1/2"></div>
+        <div className="slideNext-btn absolute right-0 z-[100] h-full w-1/2"></div>
         <Swiper
           ref={swiperRef}
-          spaceBetween={0}
-          slidesPerView={isMobile ? 1 : 1.1}
-          navigation
           modules={[Navigation, Keyboard, Zoom]}
-          // centeredSlides={true}
+          spaceBetween={0}
+          slidesPerView={isMobile ? 1 : 2}
           shortSwipes={true}
           zoom={true}
           // onSlideChange={() => console.log('slide change')}
@@ -110,90 +111,35 @@ const CustomSlider = ({ item, isMobile }) => {
           keyboard={{
             enabled: true,
           }}
+          navigation={{
+            prevEl: '.slidePrev-btn',
+            nextEl: '.slideNext-btn',
+          }}
         >
           {item.images?.map((content, index) => {
             return (
               <SwiperSlide key={index}>
                 {content.images?._type === 'image' ? (
-                  <figure className="group cursor-ew-resize cursor-pointer">
-                    {content?.images?.asset?.metadata?.dimensions.aspectRatio <
-                      1 && !isMobile ? (
-                      //DESKTOP PORTRAIT
-                      <Image
-                        src={content.images.asset.url}
-                        placeholder="blur"
-                        blurDataURL={content?.images?.asset?.metadata?.lqip}
-                        alt=""
-                        width={1000}
-                        height={0}
-                        sizes="98vw"
-                        loading="eager"
-                        style={{
-                          maxWidth: '50vh',
-                          maxHeight: '80vh',
-                          marginRight: '20px',
-                          marginLeft: '20px',
-                        }}
-                      />
-                    ) : content?.images?.asset?.metadata.dimensions
-                        .aspectRatio > 1 && isMobile ? (
-                      // MOBILE LANDSCAPE
-                      <Image
-                        src={content?.images?.asset?.url}
-                        placeholder="blur"
-                        blurDataURL={content?.images?.asset?.metadata?.lqip}
-                        alt=""
-                        width={1000}
-                        height={0}
-                        sizes="98vw"
-                        loading="eager"
-                        style={{
-                          maxWidth: '100vw',
-                          maxHeight: '50vh',
-                          marginRight: '20px',
-                          marginLeft: '20px',
-                        }}
-                      />
-                    ) : content?.images?.asset?.metadata.dimensions
-                        .aspectRatio < 1 && isMobile ? (
-                      // MOBILE PORTRAIT
-                      <Image
-                        src={content?.images?.asset?.url}
-                        placeholder="blur"
-                        blurDataURL={content?.images?.asset?.metadata?.lqip}
-                        alt=""
-                        width={1000}
-                        height={0}
-                        sizes="98vw"
-                        loading="eager"
-                        style={{
-                          maxWidth: '40vh',
-                          maxHeight: '70vh',
-                          marginRight: '20px',
-                          marginLeft: '20px',
-                        }}
-                      />
-                    ) : (
-                      // DESKTOP LANDSCAPE
-                      <Image
-                        src={content?.images?.asset?.url}
-                        placeholder="blur"
-                        blurDataURL={content?.images?.asset?.metadata?.lqip}
-                        alt=""
-                        width={1000}
-                        height={0}
-                        sizes="98vw"
-                        loading="eager"
-                        style={{
-                          maxWidth: '90vw',
-                          maxHeight: '90vh',
-                          marginRight: '20px',
-                          marginLeft: '20px',
-                        }}
-                      />
-                    )}
+                  <figure className="group h-[80vh] cursor-ew-resize cursor-pointer">
+                    <Image
+                      src={content.images.asset.url}
+                      placeholder="blur"
+                      blurDataURL={content?.images?.asset?.metadata?.lqip}
+                      alt=""
+                      loading="eager"
+                      layout="fill"
+                      objectFit="contain"
+                      objectPosition="center"
+                      unoptimized={true}
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        paddingLeft: '20px',
+                        paddingRight: '20px',
+                      }}
+                    />
                     <figcaption>
-                      <h1 className="mx-[20px] pt-2 opacity-20 duration-300 ease-in-out group-hover:opacity-100">
+                      <h1 className="p-2">
                         {content?.images?.asset?.description}
                       </h1>
                     </figcaption>
@@ -300,73 +246,6 @@ export default function IndexPage({ home, images }) {
   // video player
 
   // logo animation. First it fades out when scrolling down, then the P and P moves over to the left from right.
-  useEffect(() => {
-    const handleScroll = () => {
-      const fadeOutElements = document.querySelectorAll<HTMLElement>('.fadeOut')
-      const move1Elements = document.querySelectorAll<HTMLElement>('.move1')
-      const move2Elements = document.querySelectorAll<HTMLElement>('.move2')
-      const move3Elements =
-        document.querySelectorAll<HTMLElement>('.fixedContact')
-      const move4Elements = document.querySelectorAll<HTMLElement>('.hideThis')
-      fadeOutElements.forEach((element) => {
-        const scrollPosition = window.scrollY
-        const fadeOutPoint = 58 // Number of pixels to scroll down before starting to fade out
-        const newOpacity = Math.max(
-          1 - (scrollPosition - fadeOutPoint) / fadeOutPoint,
-          0
-        )
-        element.style.opacity = newOpacity.toString()
-      })
-      move1Elements.forEach((element) => {
-        const scrollPosition = window.scrollY
-        const moveDistance = 22 // Number of pixels to move to the left for move1
-        const fadeOutPoint = 180 // Number of pixels to scroll down before starting to fade out
-
-        if (scrollPosition > fadeOutPoint) {
-          element.style.transform = `translateX(-${moveDistance}px)`
-        } else {
-          element.style.transform = 'translateX(0)'
-        }
-      })
-      move2Elements.forEach((element) => {
-        const scrollPosition = window.scrollY
-        const moveDistance = 54 // Number of pixels to move to the left for move2
-        const fadeOutPoint = 180 // Number of pixels to scroll down before starting to fade out
-
-        if (scrollPosition > fadeOutPoint) {
-          element.style.transform = `translateX(-${moveDistance}px)`
-        } else {
-          element.style.transform = 'translateX(0)'
-        }
-      })
-      move3Elements.forEach((element) => {
-        const scrollPosition = window.scrollY
-        const fadeOutPoint = 180 // Number of pixels to scroll down before starting to fade out
-        if (scrollPosition > fadeOutPoint) {
-          element.classList.add('fixed', 'pr-6', 'right-0')
-          element.classList.remove('sticky')
-        } else {
-          element.classList.remove('fixed', 'pr-6', 'right-0')
-          element.classList.add('sticky')
-        }
-      })
-      move4Elements.forEach((element) => {
-        const scrollPosition = window.scrollY
-        const fadeOutPoint = 100 // Number of pixels to scroll down before starting to fade out
-        if (scrollPosition > fadeOutPoint) {
-          element.classList.add('fadeOutContact')
-          element.classList.remove('fadeInContact')
-        } else {
-          element.classList.remove('fadeOutContact')
-          element.classList.add('fadeInContact')
-        }
-      })
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [])
 
   const [isMobile, setIsMobile] = useState(false)
   useEffect(() => {
@@ -424,10 +303,10 @@ export default function IndexPage({ home, images }) {
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
           >
-            {hovered ? 'ಠ ˑ̫ ಠಿ' : 'ಠಿ ˑ̫ ಠಿ'}
+            {hovered ? 'ಠ ˑ̫ ಠಿ' : 'ಠಿ ˑ̫ಠಿ'}
           </div>
         </h1>
-        <div className="relative col-span-12 col-start-1 h-52 md:col-span-3 md:col-start-10">
+        <div className="relative col-span-6 col-start-6 h-52 md:col-span-3 md:col-start-10">
           <Image
             src={home?.seoimage?.asset?.url}
             alt=""

@@ -27,168 +27,25 @@ li {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* .swiper-slide {
-  width: auto !important;
-} */
-
-a:hover {
-  text-decoration: underline;
-}
-
-.fadeOut {
-  transition: opacity 0.4s ease-in-out;
-}
-
-.move1 {
-  transition: transform 0.4s ease-in-out;
-}
-
-.move2 {
-  transition: transform 0.4s ease-in-out;
-}
-
-.hideThis {
-  position: absolute;
-  right: 20px;
-}
-
-.fadeOutContact {
-  transition: all 0.2s ease-in-out;
-  pointer-events: none;
-  opacity: 0;
-}
-
-.fadeInContact {
-  transition: all 0.2s ease-in-out;
-  opacity: 1;
-}
-
-.fixedContact {
-  transition: right 0.4s ease-in-out;
-}
-
-.fixedContact h1 {
-  width: calc((100vw - 20px) / 12 * 6 - 20px);
-  padding-left: 0px;
-  transition: all 0.4s;
-}
-.fixedContact.fixed {
-  width: auto;
-  margin: 0;
-  padding-right: 0px;
-  right: 20px;
-}
-.fixedContact.fixed h1 {
-  padding-left: calc(100% - 55px);
-  transition: all 0.4s;
-}
-
-@media only screen and (min-width: 768px) {
-  .fixedContact.fixed {
-    width: calc((100vw - 20px) / 12 * 3 - 20px);
-    right: 20px;
-    left: auto;
-    margin: 0;
-  }
-  .fixedContact h1 {
-    width: auto;
-    transition: all 0.4s;
-  }
-}
-
-.arrowSize {
-  mix-blend-mode: exclusion;
-  fill: white;
-  padding-top: 4px;
-}
-
-/* SWIPER SLIDER */
-
-.swiper-wrapper {
-  width: 100vw;
-  align-items: top;
-}
-
-/* TESTING */
-
-.swiper-container {
-  width: 100%;
+.swiper {
   height: 100%;
 }
 
-.swiper-slide:nth-child(1n) {
-  width: auto;
+.slidePrev-btn:hover {
+  cursor: w-resize;
 }
 
-.swiper-slide {
-  filter: blur(0px);
-  transition: all 0.4s ease-in-out !important;
+.slideNext-btn:hover {
+  cursor: e-resize;
 }
 
-.swiper-slide-active {
-  opacity: 1 !important;
-  filter: blur(0px);
+.swiper {
+  padding-bottom: 40px !important;
 }
 
-.swiper-button-prev,
-.swiper-button-next {
-  color: rgb(0, 0, 0) !important;
-  opacity: 0.4;
-  transform: scale(0.4) translateY(-100%) !important;
-}
-.swiper-button-prev {
-  padding-right: 100px;
-  padding-left: 50px;
-  padding-top: 200px;
-  padding-bottom: 200px;
-  left: -40px !important;
-  -webkit-tap-highlight-color: rgba(255, 255, 255, 0) !important;
-  -webkit-focus-ring-color: rgba(255, 255, 255, 0) !important;
-  outline: none !important;
-}
-.swiper-button-next {
-  padding-right: 50px;
-  padding-left: 100px;
-  padding-top: 200px;
-  padding-bottom: 200px;
-  right: -40px !important;
-  -webkit-tap-highlight-color: rgba(255, 255, 255, 0) !important;
-  -webkit-focus-ring-color: rgba(255, 255, 255, 0) !important;
-  outline: none !important;
-}
-
-.swiper-button-next:hover {
-  opacity: 0.8;
-}
-
-.swiper-button-prev:hover {
-  opacity: 0.8;
-}
-
-.swiper-button-disabled {
-  opacity: 0 !important;
-}
-
-.carousel:nth-last-of-type(1) {
-  margin-bottom: 20rem !important;
-}
-
-.carousel:nth-child(1) {
-  padding-top: 0px;
-}
-
-.move--from--top {
-  animation: slide 1s ease-in-out;
-}
-
-@keyframes slidein {
-  0% {
-    opacity: 0;
-  }
-  30% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+figcaption {
+  position: absolute;
+  bottom: -40px;
+  width: 100%;
+  text-align: center;
 }
