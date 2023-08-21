@@ -172,6 +172,7 @@ const CustomSlider = ({ item, isMobile }) => {
           slidesPerView={isMobile ? 1 : 2}
           shortSwipes={true}
           zoom={true}
+          centeredSlides={true}
           // onSlideChange={() => console.log('slide change')}
           // onSwiper={(swiper) => console.log(swiper)}
           keyboard={{
