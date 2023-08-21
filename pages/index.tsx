@@ -73,6 +73,32 @@ const CustomSlider = ({ item, isMobile }) => {
     }
   }
 
+  const [isHoveredPrev, setIsHoveredPrev] = useState(false)
+  const [positionPrev, setPositionPrev] = useState({ x: 0, y: 0 })
+
+  const [isHoveredNext, setIsHoveredNext] = useState(false)
+  const [positionNext, setPositionNext] = useState({ x: 0, y: 0 })
+
+  const handleMouseEnterPrev = () => {
+    setIsHoveredPrev(true)
+  }
+  const handleMouseLeavePrev = () => {
+    setIsHoveredPrev(false)
+  }
+  const handleMouseMovePrev = (e) => {
+    setPositionPrev({ x: e.clientX, y: e.clientY })
+  }
+
+  const handleMouseEnterNext = () => {
+    setIsHoveredNext(true)
+  }
+  const handleMouseLeaveNext = () => {
+    setIsHoveredNext(false)
+  }
+  const handleMouseMoveNext = (e) => {
+    setPositionNext({ x: e.clientX, y: e.clientY })
+  }
+
   return (
     <div className="pt-16 md:pt-32">
       <div className="relative grid w-full grid-cols-12 gap-x-4 p-4">
@@ -97,8 +123,48 @@ const CustomSlider = ({ item, isMobile }) => {
         </div>
       </div>
       <div className="relative col-span-12 mt-6">
-        <div className="slidePrev-btn  absolute left-0 z-[100] h-full w-1/2"></div>
-        <div className="slideNext-btn absolute right-0 z-[100] h-full w-1/2"></div>
+        {!isMobile && (
+          <div
+            onMouseEnter={handleMouseEnterPrev}
+            onMouseLeave={handleMouseLeavePrev}
+            onMouseMove={handleMouseMovePrev}
+          >
+            <div className="slidePrev-btn absolute left-0 z-[100] h-full w-1/2"></div>
+
+            {isHoveredPrev && (
+              <div
+                className="follower"
+                style={{
+                  left: positionPrev.x + 'px',
+                  top: positionPrev.y + 'px',
+                }}
+              >
+                Prev
+              </div>
+            )}
+          </div>
+        )}
+        {!isMobile && (
+          <div
+            onMouseEnter={handleMouseEnterNext}
+            onMouseLeave={handleMouseLeaveNext}
+            onMouseMove={handleMouseMoveNext}
+          >
+            <div className="slideNext-btn absolute right-0 z-[100] h-full w-1/2"></div>
+
+            {isHoveredNext && (
+              <div
+                className="follower"
+                style={{
+                  left: positionNext.x + 'px',
+                  top: positionNext.y + 'px',
+                }}
+              >
+                Next
+              </div>
+            )}
+          </div>
+        )}
         <Swiper
           ref={swiperRef}
           modules={[Navigation, Keyboard, Zoom]}
@@ -111,10 +177,12 @@ const CustomSlider = ({ item, isMobile }) => {
           keyboard={{
             enabled: true,
           }}
-          navigation={{
-            prevEl: '.slidePrev-btn',
-            nextEl: '.slideNext-btn',
-          }}
+          navigation={
+            !isMobile && {
+              prevEl: '.slidePrev-btn',
+              nextEl: '.slideNext-btn',
+            }
+          }
         >
           {item.images?.map((content, index) => {
             return (
