@@ -67,38 +67,52 @@ const CustomVideoPlayer = ({ url, lazyLoadCallback }) => {
 const CustomSlider = ({ item, isMobile }) => {
   const swiperRef = useRef<any>();
 
-  const handleLoaded = () => {
-    console.log("swiperRef", swiperRef);
+  const handleLoaded = (e) => {
+    //    console.log("swiperRef", swiperRef);
     if (swiperRef.current) {
       swiperRef.current.swiper.update();
       swiperRef.current.swiper.slideTo(0);
+      handleMouseMovePrev(e); // Modify this line
+      handleMouseMoveNext({ clientX: 0, clientY: 0 });
     }
   };
 
-  const [isHoveredPrev, setIsHoveredPrev] = useState(false);
-  const [positionPrev, setPositionPrev] = useState({ x: 0, y: 0 });
+  // change out mouse with next and prev
 
-  const [isHoveredNext, setIsHoveredNext] = useState(false);
-  const [positionNext, setPositionNext] = useState({ x: 0, y: 0 });
+  const [positionPrev, setPositionPrev] = useState({ x: -200, y: 0 });
+  const [positionNext, setPositionNext] = useState({ x: -2000, y: 0 });
+  const [isHoveredPrev, setIsHoveredPrev] = useState(true); // Change this line
+  const [isHoveredNext, setIsHoveredNext] = useState(true); // Change this line
 
   const handleMouseEnterPrev = () => {
     setIsHoveredPrev(true);
   };
+
   const handleMouseLeavePrev = () => {
     setIsHoveredPrev(false);
   };
+
   const handleMouseMovePrev = (e) => {
-    setPositionPrev({ x: e.clientX, y: e.clientY });
+    if (isHoveredPrev) {
+      setPositionPrev({ x: e.clientX, y: e.clientY });
+    }
   };
+
   const handleMouseEnterNext = () => {
     setIsHoveredNext(true);
   };
+
   const handleMouseLeaveNext = () => {
     setIsHoveredNext(false);
   };
+
   const handleMouseMoveNext = (e) => {
-    setPositionNext({ x: e.clientX, y: e.clientY });
+    if (isHoveredNext) {
+      setPositionNext({ x: e.clientX, y: e.clientY });
+    }
   };
+
+  console.log("next", positionNext, "prev", positionNext);
 
   return (
     <div className="pt-16 md:pt-32">
@@ -122,8 +136,11 @@ const CustomSlider = ({ item, isMobile }) => {
             ))}
           </ul>
         </div>
+        <h1 className="col-span-12 col-span-12 col-start-1 gap-x-4 pb-4 pt-10">
+          Images ({item?.images?.length})
+        </h1>
       </div>
-      <div className="relative col-span-12 mt-6 cursor-none">
+      <div className="relative col-span-12 mt-6">
         {!isMobile && (
           <div
             onMouseEnter={handleMouseEnterPrev}
@@ -131,7 +148,6 @@ const CustomSlider = ({ item, isMobile }) => {
             onMouseMove={handleMouseMovePrev}
           >
             <div className="slidePrev-btn absolute left-0 z-[100] h-full w-1/2"></div>
-
             {isHoveredPrev && (
               <div
                 className="follower"
@@ -173,8 +189,6 @@ const CustomSlider = ({ item, isMobile }) => {
           slidesPerView={isMobile ? 1 : 2}
           shortSwipes={true}
           zoom={true}
-          // onSlideChange={() => console.log('slide change')}
-          // onSwiper={(swiper) => console.log(swiper)}
           keyboard={{
             enabled: true,
           }}
@@ -335,7 +349,7 @@ export default function IndexPage({ home, images }) {
 
   // get hight of div with more information on mobile
   const divRef = useRef(null);
-  const [divHeight, setDivHeight] = useState(0);
+  const [, setDivHeight] = useState(0);
 
   useEffect(() => {
     if (divRef.current) {

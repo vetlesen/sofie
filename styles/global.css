@@ -38,27 +38,6 @@ h1 {
 }
 
 .swiper {
-  height: 100%;
-  cursor: none !important;
-}
-
-.swiper-slide {
-  cursor: none !important;
-}
-
-figure {
-  cursor: none !important;
-}
-
-.slidePrev-btn:hover {
-  cursor: none !important;
-}
-
-.slideNext-btn:hover {
-  cursor: none !important;
-}
-
-.swiper {
   padding-bottom: 40px !important;
 }
 
@@ -84,9 +63,8 @@ figcaption {
   border: 1px solid rgb(255, 255, 255);
   color: white;
   border-radius: 100px;
-  pointer-events: none; /* This prevents the follower div from interfering with mouse events on the container */
   z-index: 1000;
-  transform: translate(-50%, -50%);
+  transform: translate(50%, 50%);
   font-weight: 200 !important;
   font-family: Helvetica !important;
 }
