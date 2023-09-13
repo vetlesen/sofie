@@ -1,42 +1,44 @@
 // Packages
-import groq from 'groq'
-import client from '../client'
-import Link from 'next/link'
-import Image from 'next/image'
-import React, { useEffect, useState, useRef, useDeferredValue } from 'react'
+import groq from "groq";
+import client from "../client";
+import Link from "next/link";
+import Image from "next/image";
+import React, { useEffect, useState, useRef, useDeferredValue } from "react";
 
 // video
-import ReactPlayer from 'react-player/lazy'
+import ReactPlayer from "react-player/lazy";
 
 // swiper
-import { Swiper, SwiperSlide } from 'swiper/react'
-import 'swiper/css'
-import 'swiper/css/navigation'
-import { Navigation, Keyboard, Zoom } from 'swiper/modules'
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import { Navigation, Keyboard, Zoom } from "swiper/modules";
 
 const CustomVideoPlayer = ({ url, lazyLoadCallback }) => {
   // video play mode
-  const [playing, setPlaying] = useState(() => false)
+  const [playing, setPlaying] = useState(() => false);
 
-  const deferredPlaying = useDeferredValue(() => playing)
+  const deferredPlaying = useDeferredValue(() => playing);
 
   useEffect(() => {
     if (deferredPlaying) {
     } else {
     }
-  }, [deferredPlaying])
+  }, [deferredPlaying]);
 
   const handlePlay = () => {
-    setPlaying(!playing)
-  }
+    setPlaying(!playing);
+  };
 
   // fixing the problem with hydration
-  const [hasWindow, setHasWindow] = useState(false)
+  const [hasWindow, setHasWindow] = useState(false);
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setHasWindow(true)
+    if (typeof window !== "undefined") {
+      setHasWindow(true);
     }
-  }, [])
+  }, []);
+
+  // when loading the website do one key left and right
 
   return (
     <div className="m relative h-full  max-w-[80vw] md:max-w-[75vw] lg:max-w-[70vw] xl:max-w-[50vw]">
@@ -44,7 +46,7 @@ const CustomVideoPlayer = ({ url, lazyLoadCallback }) => {
         onClick={handlePlay}
         className="absolute inset-0 z-50 cursor-pointer p-4 text-white mix-blend-exclusion"
       >
-        {playing ? 'PAUSE' : 'PLAY'}
+        {playing ? "PAUSE" : "PLAY"}
       </p>
       {hasWindow && (
         <ReactPlayer
@@ -59,45 +61,44 @@ const CustomVideoPlayer = ({ url, lazyLoadCallback }) => {
         />
       )}
     </div>
-  )
-}
+  );
+};
 
 const CustomSlider = ({ item, isMobile }) => {
-  const swiperRef = useRef<any>()
+  const swiperRef = useRef<any>();
 
   const handleLoaded = () => {
-    console.log('swiperRef', swiperRef)
+    console.log("swiperRef", swiperRef);
     if (swiperRef.current) {
-      swiperRef.current.swiper.update()
-      swiperRef.current.swiper.slideTo(0)
+      swiperRef.current.swiper.update();
+      swiperRef.current.swiper.slideTo(0);
     }
-  }
+  };
 
-  const [isHoveredPrev, setIsHoveredPrev] = useState(false)
-  const [positionPrev, setPositionPrev] = useState({ x: 0, y: 0 })
+  const [isHoveredPrev, setIsHoveredPrev] = useState(false);
+  const [positionPrev, setPositionPrev] = useState({ x: 0, y: 0 });
 
-  const [isHoveredNext, setIsHoveredNext] = useState(false)
-  const [positionNext, setPositionNext] = useState({ x: 0, y: 0 })
+  const [isHoveredNext, setIsHoveredNext] = useState(false);
+  const [positionNext, setPositionNext] = useState({ x: 0, y: 0 });
 
   const handleMouseEnterPrev = () => {
-    setIsHoveredPrev(true)
-  }
+    setIsHoveredPrev(true);
+  };
   const handleMouseLeavePrev = () => {
-    setIsHoveredPrev(false)
-  }
+    setIsHoveredPrev(false);
+  };
   const handleMouseMovePrev = (e) => {
-    setPositionPrev({ x: e.clientX, y: e.clientY })
-  }
-
+    setPositionPrev({ x: e.clientX, y: e.clientY });
+  };
   const handleMouseEnterNext = () => {
-    setIsHoveredNext(true)
-  }
+    setIsHoveredNext(true);
+  };
   const handleMouseLeaveNext = () => {
-    setIsHoveredNext(false)
-  }
+    setIsHoveredNext(false);
+  };
   const handleMouseMoveNext = (e) => {
-    setPositionNext({ x: e.clientX, y: e.clientY })
-  }
+    setPositionNext({ x: e.clientX, y: e.clientY });
+  };
 
   return (
     <div className="pt-16 md:pt-32">
@@ -135,8 +136,8 @@ const CustomSlider = ({ item, isMobile }) => {
               <div
                 className="follower"
                 style={{
-                  left: positionPrev.x + 'px',
-                  top: positionPrev.y + 'px',
+                  left: positionPrev.x + "px",
+                  top: positionPrev.y + "px",
                 }}
               >
                 Prev
@@ -156,8 +157,8 @@ const CustomSlider = ({ item, isMobile }) => {
               <div
                 className="follower"
                 style={{
-                  left: positionNext.x + 'px',
-                  top: positionNext.y + 'px',
+                  left: positionNext.x + "px",
+                  top: positionNext.y + "px",
                 }}
               >
                 Next
@@ -179,31 +180,29 @@ const CustomSlider = ({ item, isMobile }) => {
           }}
           navigation={
             !isMobile && {
-              prevEl: '.slidePrev-btn',
-              nextEl: '.slideNext-btn',
+              prevEl: ".slidePrev-btn",
+              nextEl: ".slideNext-btn",
             }
           }
         >
           {item.images?.map((content, index) => {
             return (
               <SwiperSlide key={index}>
-                {content.images?._type === 'image' ? (
-                  <figure className="group h-[55vh] cursor-ew-resize cursor-pointer md:h-[80vh]">
+                {content.images?._type === "image" ? (
+                  <figure className="group relative h-[55vh] cursor-ew-resize cursor-pointer md:h-[80vh]">
                     <Image
                       src={content.images.asset.url}
                       placeholder="blur"
                       blurDataURL={content?.images?.asset?.metadata?.lqip}
                       alt=""
-                      loading="eager"
+                      loading="lazy"
                       layout="fill"
-                      objectFit="contain"
-                      objectPosition="center"
                       unoptimized={true}
                       style={{
-                        width: '100%',
-                        height: '100%',
-                        paddingLeft: '20px',
-                        paddingRight: '20px',
+                        height: "100%",
+                        paddingLeft: "20px",
+                        paddingRight: "20px",
+                        objectFit: "contain",
                       }}
                     />
                     <figcaption>
@@ -219,80 +218,82 @@ const CustomSlider = ({ item, isMobile }) => {
                   />
                 )}
               </SwiperSlide>
-            )
+            );
           })}
         </Swiper>
       </div>
     </div>
-  )
-}
+  );
+};
 
 const InactiveAnimation = () => {
-  const [isVisible, setIsVisible] = useState([])
-  const [isActive, setIsActive] = useState(true)
+  const [isVisible, setIsVisible] = useState([]);
+  const [isActive, setIsActive] = useState(true);
 
   useEffect(() => {
-    let timeout
-    let interval
+    let timeout;
+    let interval;
 
-    const inactivityDuration = 30000
-    const showInterval = 500
-    const amountOfText = 1000
+    const inactivityDuration = 60000;
+    const showInterval = 500;
+    const amountOfText = 1000;
 
     const handleInactive = () => {
       // If the website has been inactive for 1 second,
       // start showing 'a's one by one at a 50ms interval.
       timeout = setTimeout(() => {
-        setIsActive(false)
+        setIsActive(false);
         interval = setInterval(() => {
           setIsVisible((prevVisibility) => {
-            const newVisibility = [...prevVisibility]
-            const randomIndex = Math.floor(Math.random() * newVisibility.length)
-            newVisibility[randomIndex] = true
-            return newVisibility
-          })
-        }, showInterval)
-      }, inactivityDuration)
-    }
+            const newVisibility = [...prevVisibility];
+            const randomIndex = Math.floor(
+              Math.random() * newVisibility.length
+            );
+            newVisibility[randomIndex] = true;
+            return newVisibility;
+          });
+        }, showInterval);
+      }, inactivityDuration);
+    };
 
     const handleMouseOrKeyboardActivity = () => {
       // When mouse or keyboard activity is detected,
       // reset the visibility to hidden and clear the timeout and interval.
-      setIsVisible(Array(amountOfText).fill(false))
-      clearTimeout(timeout)
-      clearInterval(interval)
+      setIsVisible(Array(amountOfText).fill(false));
+      clearTimeout(timeout);
+      clearInterval(interval);
       // Start the process over again
-      handleInactive()
-    }
+      handleInactive();
+    };
 
     const handleWheel = (event) => {
       // Detect scroll activity (e.g., two-finger scroll on trackpads)
       // and reset the inactivity timer.
       if (event.deltaY !== 0) {
-        clearTimeout(timeout)
-        clearInterval(interval)
-        handleInactive()
+        clearTimeout(timeout);
+        clearInterval(interval);
+        handleInactive();
       }
-    }
+    };
 
     // Add event listeners to track user activity
-    document.addEventListener('mousemove', handleMouseOrKeyboardActivity)
-    document.addEventListener('keydown', handleMouseOrKeyboardActivity)
-    document.addEventListener('wheel', handleWheel)
+    document.addEventListener("mousemove", handleMouseOrKeyboardActivity);
+    document.addEventListener("keydown", handleMouseOrKeyboardActivity);
+    document.addEventListener("wheel", handleWheel);
 
     // Initial setup
-    setIsVisible(Array(amountOfText).fill(false))
-    handleInactive()
+    setIsVisible(Array(amountOfText).fill(false));
+    handleInactive();
 
     // Clean up event listeners and timeouts/intervals when the component unmounts
     return () => {
-      document.removeEventListener('mousemove', handleMouseOrKeyboardActivity)
-      document.removeEventListener('keydown', handleMouseOrKeyboardActivity)
-      document.removeEventListener('wheel', handleWheel)
-      clearTimeout(timeout)
-      clearInterval(interval)
-    }
-  }, [])
+      document.removeEventListener("mousemove", handleMouseOrKeyboardActivity);
+      document.removeEventListener("keydown", handleMouseOrKeyboardActivity);
+      document.removeEventListener("wheel", handleWheel);
+      clearTimeout(timeout);
+      clearInterval(interval);
+    };
+  }, []);
 
   return (
     <div className="col-span-12 flex w-full flex-wrap">
@@ -300,41 +301,41 @@ const InactiveAnimation = () => {
         <p
           key={index}
           style={{
-            visibility: isActive ? 'hidden' : isVisible ? 'visible' : 'hidden',
+            visibility: isActive ? "hidden" : isVisible ? "visible" : "hidden",
           }}
         >
           ಠಿ ˑ̫ ಠ
         </p>
       ))}
     </div>
-  )
-}
+  );
+};
 
 export default function IndexPage({ home, images }) {
   // video player
 
   // logo animation. First it fades out when scrolling down, then the P and P moves over to the left from right.
 
-  const [isMobile, setIsMobile] = useState(false)
+  const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
     function handleResize() {
-      setIsMobile(window.innerWidth < 768)
+      setIsMobile(window.innerWidth < 768);
     }
-    handleResize()
-    window.addEventListener('resize', handleResize)
+    handleResize();
+    window.addEventListener("resize", handleResize);
     return () => {
-      window.removeEventListener('resize', handleResize)
-    }
-  }, [])
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   // scroll to top
   const handleScrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   // get hight of div with more information on mobile
-  const divRef = useRef(null)
-  const [divHeight, setDivHeight] = useState(0)
+  const divRef = useRef(null);
+  const [divHeight, setDivHeight] = useState(0);
 
   useEffect(() => {
     if (divRef.current) {
@@ -342,21 +343,22 @@ export default function IndexPage({ home, images }) {
         // The entries array contains information about observed elements
         for (const entry of entries) {
           if (entry.target === divRef.current) {
-            setDivHeight(entry.contentRect.height)
+            setDivHeight(entry.contentRect.height);
           }
         }
-      })
+      });
 
-      observer.observe(divRef.current)
+      observer.observe(divRef.current);
 
       return () => {
-        observer.disconnect()
-      }
+        observer.disconnect();
+      };
     }
-  }, [])
+  }, []);
 
-  const [hovered, setHovered] = useState(false)
-  console.log(home)
+  const [hovered, setHovered] = useState(false);
+  console.log(home);
+
   return (
     <>
       {/* inactive section */}
@@ -366,11 +368,11 @@ export default function IndexPage({ home, images }) {
       {/* top section */}
       <h1 className="fixed z-[100] pl-4">
         <div
-          className={`word-container ${hovered ? 'hovered' : ''}`}
+          className={`word-container ${hovered ? "hovered" : ""}`}
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
         >
-          {hovered ? 'ಠ ˑ̫ ಠಿ' : 'ಠಿ ˑ̫ ಠ'}
+          {hovered ? "ಠ ˑ̫ ಠಿ" : "ಠಿ ˑ̫ ಠ"}
         </div>
       </h1>
       <div className="mt-4 grid grid-cols-12 gap-x-4 gap-y-4 p-4 pt-7">
@@ -395,15 +397,17 @@ export default function IndexPage({ home, images }) {
             ))}
           </ul>
         </div>
-        <div className="relative col-span-6 col-start-6 h-[200px] cursor-help md:col-span-3 md:col-start-10">
+        <div className="relative col-span-6 col-start-7 h-[200px] cursor-help md:col-span-3 md:col-start-10">
           <Image
             src={home?.seoimage?.asset?.url}
             alt=""
             sizes="98vw"
             loading="eager"
-            fill
+            width={150}
+            height={100}
             style={{
-              objectFit: 'cover',
+              objectFit: "contain",
+              float: "right",
             }}
           ></Image>
         </div>
@@ -414,7 +418,7 @@ export default function IndexPage({ home, images }) {
           <CustomSlider
             item={item}
             isMobile={isMobile}
-            key={'video-' + index}
+            key={"video-" + index}
           />
         ))}
       </div>
@@ -432,7 +436,7 @@ export default function IndexPage({ home, images }) {
         </div>
       </div>
     </>
-  )
+  );
 }
 
 export async function getStaticProps() {
@@ -447,7 +451,7 @@ export async function getStaticProps() {
       "images": *[_type=='images']{ images },
         asset->
       }
-  `)
+  `);
 
   const images = await client.fetch(groq`
     *[_type == "images"] | order(orderRank)
@@ -470,12 +474,12 @@ export async function getStaticProps() {
           }
         },
      }
-  `)
+  `);
 
   return {
     props: {
       home: home,
       images: images,
     },
-  }
+  };
 }
