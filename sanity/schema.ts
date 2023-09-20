@@ -168,14 +168,21 @@ export const schema: { types: SchemaTypeDefinition[] } = {
           ]
         },
         {
-          title: "SEO Image",
-          name: "seoimage",
-          type: "image",
-          description: 'The image displayed when shared on facebook, twitter etc. May take some time to change due to facebook chaching',
-          options: {
-            hotspot: true,
-          },
+          name: 'drawings',
+          title: 'Drawings',
+          type: 'array',
+          of: [
+            {
+              title: "drawing",
+              name: "drawing",
+              type: "image",
+              options: {
+                hotspot: true,
+              },
+            },
+          ]
         },
+
       ]
     },
   ],

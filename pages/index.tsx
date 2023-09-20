@@ -371,7 +371,8 @@ export default function IndexPage({ home, images }) {
   }, []);
 
   const [hovered, setHovered] = useState(false);
-  console.log(home);
+  const randomIndex = Math.floor(Math.random() * home?.drawings.length);
+  console.log("randomIndex", randomIndex);
 
   return (
     <>
@@ -413,7 +414,7 @@ export default function IndexPage({ home, images }) {
         </div>
         <div className="relative col-span-6 col-start-7 h-[200px] cursor-help md:col-span-3 md:col-start-10">
           <Image
-            src={home?.seoimage?.asset?.url}
+            src={home?.drawings[randomIndex].asset?.url}
             alt=""
             sizes="98vw"
             loading="eager"
@@ -458,10 +459,10 @@ export async function getStaticProps() {
     *[_type == "globals"][0]
     {
       ...,
-      seoimage{
-          ...,
+      drawings[]{
+        ...,
           asset->
-        },
+      },
       "images": *[_type=='images']{ images },
         asset->
       }
