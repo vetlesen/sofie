@@ -112,7 +112,7 @@ const CustomSlider = ({ item, isMobile }) => {
     }
   };
 
-  console.log("next", positionNext, "prev", positionNext);
+  // console.log("next", positionNext, "prev", positionNext);
 
   return (
     <div className="pt-16 md:pt-32">
@@ -203,15 +203,16 @@ const CustomSlider = ({ item, isMobile }) => {
             return (
               <SwiperSlide key={index}>
                 {content.images?._type === "image" ? (
-                  <figure className="group relative h-[55vh] cursor-ew-resize cursor-pointer md:h-[80vh]">
+                  <figure className="group relative h-[55vh] cursor-ew-resize cursor-pointer object-fill md:h-[80vh]">
                     <Image
                       src={content.images.asset.url}
                       placeholder="blur"
                       blurDataURL={content?.images?.asset?.metadata?.lqip}
                       alt=""
                       loading="lazy"
-                      layout="fill"
                       unoptimized={true}
+                      width={1500}
+                      height={1500}
                       style={{
                         height: "100%",
                         paddingLeft: "20px",
@@ -371,9 +372,26 @@ export default function IndexPage({ home, images }) {
   }, []);
 
   const [hovered, setHovered] = useState(false);
-  const randomIndex = Math.floor(Math.random() * home?.drawings.length);
-  console.log("randomIndex", randomIndex);
+  // functionco to handle hover state
+  const handleHover = () => {
+    setHovered(!hovered);
+  };
 
+  // function to handle mouse leave event
+  const handleMouseLeave = () => {
+    setHovered(false);
+  };
+
+  // function to handle mouse enter event
+  const handleMouseEnter = () => {
+    setHovered(true);
+  };
+
+  const [randomIndex, setRandomIndex] = useState(null);
+
+  useEffect(() => {
+    setRandomIndex(Math.floor(Math.random() * home.drawings.length));
+  }, []);
   return (
     <>
       {/* inactive section */}
@@ -412,19 +430,34 @@ export default function IndexPage({ home, images }) {
             ))}
           </ul>
         </div>
-        <div className="relative col-span-6 col-start-7 h-[200px] cursor-help md:col-span-3 md:col-start-10">
-          <Image
-            src={home?.drawings[randomIndex].asset?.url}
-            alt=""
-            sizes="98vw"
-            loading="eager"
-            width={150}
-            height={100}
-            style={{
-              objectFit: "contain",
-              float: "right",
-            }}
-          ></Image>
+
+        <div className="relative col-span-6 col-start-7 float-right cursor-help md:col-span-2 md:col-start-11">
+          {home.drawings.map((item, index) => {
+            return (
+              <div
+                key={index}
+                className={
+                  randomIndex !== null && index === randomIndex
+                    ? "float-right max-w-[150px]"
+                    : "float-right hidden max-w-[150px]"
+                }
+              >
+                <Image
+                  src={item.asset?.url}
+                  alt=""
+                  sizes="48vw"
+                  quality={20}
+                  loading="eager"
+                  width={0}
+                  height={0}
+                  style={{
+                    objectFit: "contain",
+                    width: "100%",
+                  }}
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
       {/* swiper */}
