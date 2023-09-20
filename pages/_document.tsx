@@ -27,24 +27,27 @@ export default function Document(home) {
         <meta name="theme-color" content="#ffffff" />
         <meta
           name="description"
-          content="Norwegian Photographer with a documentary approach to Photography."
+          content="
+If you have any questions or would like to discuss a project or possible collaborations, please do not hesitate to contact me by email or phone."
         />
         <meta property="og:url" content="https://sofieramstad.no/" />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="Sofie Ramstad Arkitekter" />
+        <meta property="og:title" content="Sofie Ramstad" />
         <meta
           property="og:description"
-          content="Norwegian Photographer with a documentary approach to Photography."
+          content="
+If you have any questions or would like to discuss a project or possible collaborations, please do not hesitate to contact me by email or phone."
         />
         <meta property="og:image" content="https://cdn.sanity.io/images/v4q3lb9i/production/fa4b0bc767862e987400caa400ab03114ca9e0d5-4338x2999.jpg" />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta property="twitter:domain" content="sofieramstad.no" />
         <meta property="twitter:url" content="https://sofieramstad.no/" />
-        <meta name="twitter:title" content="Sofie Ramstad Arkitekter" />
+        <meta name="twitter:title" content="Sofie Ramstad" />
         <meta
           name="twitter:description"
-          content="Norwegian Photographer with a documentary approach to Photography."
+          content="
+If you have any questions or would like to discuss a project or possible collaborations, please do not hesitate to contact me by email or phone."
         />
         <meta name="twitter:image" content="https://cdn.sanity.io/images/v4q3lb9i/production/fa4b0bc767862e987400caa400ab03114ca9e0d5-4338x2999.jpg" />
       </Head>
