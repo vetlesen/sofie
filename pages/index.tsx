@@ -40,6 +40,8 @@ const CustomVideoPlayer = ({ url, lazyLoadCallback }) => {
 
   // when loading the website do one key left and right
 
+
+
   return (
     <div className="m relative h-full  max-w-[80vw] md:max-w-[75vw] lg:max-w-[70vw] xl:max-w-[50vw]">
       <p
@@ -390,8 +392,10 @@ export default function IndexPage({ home, images }) {
   const [randomIndex, setRandomIndex] = useState(null);
 
   useEffect(() => {
-    setRandomIndex(Math.floor(Math.random() * home.drawings.length));
-  }, []);
+    setRandomIndex(Math.floor(Math.random() * home?.drawings?.length));
+  }, [home?.drawings?.length]);
+
+  
   return (
     <>
       {/* inactive section */}
@@ -433,6 +437,7 @@ export default function IndexPage({ home, images }) {
 
         <div className="relative col-span-6 col-start-7 float-right cursor-help md:col-span-2 md:col-start-11">
           {home.drawings.map((item, index) => {
+
             return (
               <div
                 key={index}
