@@ -25,6 +25,7 @@ const serif = PT_Serif({
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
+    
       <style jsx global>
         {`
           :root {
@@ -34,6 +35,7 @@ export default function App({ Component, pageProps }: AppProps) {
           }
         `}
       </style>
+      <title>Sofie Ramstad</title>
 
       <Component {...pageProps} />
     </>

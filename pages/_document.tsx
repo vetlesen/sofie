@@ -36,7 +36,7 @@ export default function Document(home) {
           property="og:description"
           content="Norwegian Photographer with a documentary approach to Photography."
         />
-        <meta property="og:image" content="" />
+        <meta property="og:image" content="https://cdn.sanity.io/images/v4q3lb9i/production/fa4b0bc767862e987400caa400ab03114ca9e0d5-4338x2999.jpg" />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta property="twitter:domain" content="sofieramstad.no" />
@@ -46,7 +46,7 @@ export default function Document(home) {
           name="twitter:description"
           content="Norwegian Photographer with a documentary approach to Photography."
         />
-        <meta name="twitter:image" content="" />
+        <meta name="twitter:image" content="https://cdn.sanity.io/images/v4q3lb9i/production/fa4b0bc767862e987400caa400ab03114ca9e0d5-4338x2999.jpg" />
       </Head>
       <body className="text-black">
         <Main />
