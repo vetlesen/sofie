@@ -22,7 +22,6 @@ loadEnvConfig(__dirname, dev, { info: () => null, error: console.error })
 
 // I do something wrong on the set up and add the dataset like this underneath..
 const dataset = "production"
-
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
 // const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET
 
