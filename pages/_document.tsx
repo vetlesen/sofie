@@ -6,6 +6,11 @@ export default function Document() {
     <Html lang="en" className="bg-white">
       <head>
         <PlausibleProvider domain="sofieramstad.no" />
+        <script
+          defer
+          data-domain="sofieramstad.no"
+          src="https://plausible.io/js/script.js"
+        ></script>
       </head>
       <Head>
         <link
