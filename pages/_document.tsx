@@ -4,9 +4,10 @@ import PlausibleProvider from "next-plausible";
 export default function Document() {
   return (
     <Html lang="en" className="bg-white">
-      <Head>
+      <head>
         <PlausibleProvider domain="sofieramstad.no" />
-
+      </head>
+      <Head>
         <link
           rel="apple-touch-icon"
           sizes="180x180"
